@@ -7,7 +7,7 @@ import 'package:enquete/domain/usecases/usecases.dart';
 
 import 'package:enquete/data/http/http.dart';
 
-class RemoteAuthentication {
+class RemoteAuthentication implements IAuthentication {
   final HttpClient httpClient;
   final String url;
 
