@@ -1,3 +1,5 @@
+import 'package:enquete/data/models/models.dart';
+import 'package:enquete/domain/entities/account_entity.dart';
 import 'package:enquete/domain/helpers/helpers.dart';
 import 'package:meta/meta.dart';
 
@@ -11,9 +13,10 @@ class RemoteAuthentication {
 
   RemoteAuthentication({@required this.httpClient, @required this.url});
 
-  Future<void> auth(AuthenticationParams params) async {
+  Future<AccountEntity> auth(AuthenticationParams params) async {
     try {
-      await httpClient.request(url: url, method: 'post', body: RemoteAuthenticationParams.fromDomain(params).toJson());
+      final httpResponse = await httpClient.request(url: url, method: 'post', body: RemoteAuthenticationParams.fromDomain(params).toJson());
+      return RemoteAccountModel.fromJson(httpResponse).toEntity();
     } on HttpError catch (error) {
       throw error == HttpError.unauthorized ? DomainError.invalidCrendentials : DomainError.unexpected;
     }
