@@ -12,7 +12,7 @@
         },
         {
             "name": "Flutter",
-            "program": "lib/main.dart",
+            "program": "lib/main/main.dart",
             "request": "launch",
             "type": "dart"
         }
